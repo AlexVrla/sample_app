@@ -261,6 +261,7 @@ DEPENDENCIES
   guard-minitest (~> 2.4, >= 2.4.6)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  minitest (~> 5.8, >= 5.8.4)
   minitest-reporters (~> 1.4, >= 1.4.3)
   pg (~> 1.2, >= 1.2.3)
   puma (~> 4.1)
