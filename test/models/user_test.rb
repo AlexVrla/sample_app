@@ -39,10 +39,22 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email validation should not accept invalid addresses" do
-    invalid_addresses = %w[alex@gmail,com alex@com gmail.com @gmail.com. alexgmail.com]
+    invalid_addresses = %w[alex@gmail,com alex@com gmail.com @gmail.com. alexgmail.com foo@bar..com]
     invalid_addresses.each do |address|
       @user.email = address
       assert_not @user.valid?, "#{address.inspect} should be invalid"
     end
+  end
+
+  test "email address should be unique" do
+    duplicate_user = @user.dup
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
+  test "email addresses should be lowcased before saving them" do
+    new_dude = User.new(name: 'whatever', email:'blaBhbsdfHBJHb@gmail.COM')
+    new_dude.save
+    assert_equal new_dude.email, new_dude.reload.email.downcase
   end
 end
