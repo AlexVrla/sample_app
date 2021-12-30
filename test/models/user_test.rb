@@ -3,7 +3,8 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(name: 'the dude', email: 'elduderino@gmail.com')
+    @user = User.new(name: 'the dude', email: 'elduderino@gmail.com',
+                    password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
@@ -53,8 +54,8 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email addresses should be lowcased before saving them" do
-    new_dude = User.new(name: 'whatever', email:'blaBhbsdfHBJHb@gmail.COM')
-    new_dude.save
-    assert_equal new_dude.email, new_dude.reload.email.downcase
+    @user.email = 'blaBhbsdfHBJHb@gmail.COM'
+    @user.save
+    assert_equal @user.email, @user.reload.email.downcase
   end
 end
