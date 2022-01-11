@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
   end
 
   def about
+    @user = User.create()
   end
 
   def contact
