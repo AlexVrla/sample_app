@@ -17,4 +17,20 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select "li", "Password confirmation doesn't match Password"
   end
 
+  test "valid signup information is save" do
+    get signup_path
+    assert_difference "User.count" do
+      post users_path, params: {user: { name: 'Never Used',
+                                        email: "neverused@email.com",
+                                        password: "foobar",
+                                        password_confirmation: "foobar" }}
+    end
+    follow_redirect!
+    assert_template 'users/show'
+    assert_not flash.nil?
+  end
+
+  # test "flash notice after succesful sign-up" do
+
+  # end
 end
