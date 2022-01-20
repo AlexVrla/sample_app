@@ -14,8 +14,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # user = current_user
 
   end
-
-
 end
