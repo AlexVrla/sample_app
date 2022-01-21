@@ -17,7 +17,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select "li", "Password confirmation doesn't match Password"
   end
 
-  test "valid signup information is save" do
+  test "valid signup information is saved" do
     get signup_path
     assert_difference "User.count" do
       post users_path, params: {user: { name: 'Never Used',
