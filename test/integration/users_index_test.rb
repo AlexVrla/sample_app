@@ -12,7 +12,6 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     # log_in_as(@user)
     assert is_logged_in?
     get users_path
-  #   # assert_redirected_to login_path
     assert_template 'users/index'
     assert_select 'img.gravatar', count: 30
     assert_select 'div.pagination', count: 2

@@ -38,12 +38,20 @@ before_action :logged_in_user, only: [:index]
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:success] = "User deleted"
+    redirect_to users_path
+  end
+
+
 
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                  :password_confirmation)
+                                   :password_confirmation)
     end
 
     #Before filters

@@ -4,20 +4,24 @@ jaydee:
   name: James Yancey
   email: jdilla@gmail.com
   password_digest: <%= User.digest('beatsbeatsbeats') %>
+  admin: true
 
 craven:
   name: Nicholas Craven
   email: nicholas.craven@gmail.com
   password_digest: <%= User.digest('2barloop') %>
+  admin: false
 
 nastynas:
   name: Nastynas
   email: alexandre.vrla@gmail.com
   password_digest: <%= User.digest('qwerty') %>
+  admin: true
 
 <% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User_#{n}" %>
   email: <%= "user-#{n}@sample.com"%>
   password_digest: <%= User.digest("password") %>
+  admin: false
 <% end %>
