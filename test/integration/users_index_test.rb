@@ -6,7 +6,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     @user = users(:jaydee)
   end
 
-  test 'index including pagination' do
+  test 'index as admin including pagination and delete links' do
     post login_path, params: { session: { email: "jdilla@gmail.com",
                                        password: "beatsbeatsbeats" }}
     # log_in_as(@user)
@@ -19,5 +19,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
       assert_select 'a[href=?]', user_path(user), text: user.name
     end
   end
+
+
 
 end

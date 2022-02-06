@@ -37,19 +37,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not @other_user.admin?
     delete user_path(@user)
     assert_not @user.nil?
-    follow_redirect!
-    assert_template 'users/index'
+    assert_redirected_to root_url
   end
 
   test 'should not allow non-logged in users to delete a user' do
-    # post login_path, params: { session: { email: "nicholas.crrraven@gmail.com",
-    #                                    password: "2barlooooop" }}
-    # assert_not is_logged_in?
-    @user = User.find_by(name: 'James Yancey')
     assert_no_difference 'User.count' do
-      delete user_path(@user)
+      delete user_url(@user)
     end
-      # follow_redirect!
-      # assert_template
+    assert_redirected_to login_path
   end
 end

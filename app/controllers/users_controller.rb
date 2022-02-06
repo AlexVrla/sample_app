@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-before_action :logged_in_user, only: [:index]
-before_action :user_admin, only: [:destroy, :index]
+before_action :logged_in_user, only: [:index, :destroy]
+before_action :user_admin, only: :destroy
 
   def index
     @users = User.paginate(page: params[:page])
@@ -69,7 +69,7 @@ before_action :user_admin, only: [:destroy, :index]
     def user_admin
       unless current_user.admin?
         flash[:danger] = "you cannot do that, you ain't an admin!"
-        redirect_to users_path
+        redirect_to root_path
       end
     end
 end
