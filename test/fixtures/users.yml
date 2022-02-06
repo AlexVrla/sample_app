@@ -5,6 +5,16 @@ jaydee:
   email: jdilla@gmail.com
   password_digest: <%= User.digest('beatsbeatsbeats') %>
 
+craven:
+  name: Nicholas Craven
+  email: nicholas.craven@gmail.com
+  password_digest: <%= User.digest('2barloop') %>
+
+nastynas:
+  name: Nastynas
+  email: alexandre.vrla@gmail.com
+  password_digest: <%= User.digest('qwerty') %>
+
 # one:
 #   name: MyString
 #   email: MyString
