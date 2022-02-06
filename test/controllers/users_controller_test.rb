@@ -29,4 +29,27 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                                                     admin: true }}
     assert_not @other_user.reload.admin?
   end
+
+  test "should not allow non-admin users to delete a user" do
+    post login_path, params: { session: { email: "nicholas.craven@gmail.com",
+                                       password: "2barloop" }}
+    assert is_logged_in?
+    assert_not @other_user.admin?
+    delete user_path(@user)
+    assert_not @user.nil?
+    follow_redirect!
+    assert_template 'users/index'
+  end
+
+  test 'should not allow non-logged in users to delete a user' do
+    # post login_path, params: { session: { email: "nicholas.crrraven@gmail.com",
+    #                                    password: "2barlooooop" }}
+    # assert_not is_logged_in?
+    @user = User.find_by(name: 'James Yancey')
+    assert_no_difference 'User.count' do
+      delete user_path(@user)
+    end
+      # follow_redirect!
+      # assert_template
+  end
 end
