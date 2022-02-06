@@ -3,20 +3,22 @@ require 'test_helper'
 class UsersIndexTest < ActionDispatch::IntegrationTest
 
   def setup
-    @user = users(:nastynas)
+    @user = users(:jaydee)
   end
 
-  test 'first page should have 30 users' do
-    get login_path
+  test 'index including pagination' do
     post login_path, params: { session: { email: "jdilla@gmail.com",
                                        password: "beatsbeatsbeats" }}
-
+    # log_in_as(@user)
     assert is_logged_in?
-  #  log_in_as(@user)
     get users_path
   #   # assert_redirected_to login_path
     assert_template 'users/index'
     assert_select 'img.gravatar', count: 30
+    assert_select 'div.pagination', count: 2
+    User.paginate(page: 1).each do |user|
+      assert_select 'a[href=?]', user_path(user), text: user.name
+    end
   end
 
 end
