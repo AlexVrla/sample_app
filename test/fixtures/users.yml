@@ -15,10 +15,9 @@ nastynas:
   email: alexandre.vrla@gmail.com
   password_digest: <%= User.digest('qwerty') %>
 
-# one:
-#   name: MyString
-#   email: MyString
-
-# two:
-#   name: MyString
-#   email: MyString
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User_#{n}" %>
+  email: <%= "user-#{n}@sample.com"%>
+  password_digest: <%= User.digest("password") %>
+<% end %>
